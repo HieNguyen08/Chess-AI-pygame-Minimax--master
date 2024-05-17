@@ -5,6 +5,7 @@ from tools import Position, OnBoard
 import math
 from Fen import *
 
+
 class Board:
     def __init__(self):
         # 0 -> white , 1 -> Black
@@ -62,8 +63,10 @@ class Board:
         self.winner = None
         self.pieceToPromote = None
 
-        self.whitePromotions = [Queen(Position(0, 0), 0), Bishop(Position(0, 1), 0), Knight(Position(0, 2), 0), Rook(Position(0, 3), 0)]
-        self.blackPromotions = [Rook(Position(0, 7), 1), Knight(Position(0, 6), 1), Bishop(Position(0, 5), 1), Queen(Position(0, 4), 1)]
+        self.whitePromotions = [Queen(Position(0, 0), 0), Bishop(Position(0, 1), 0), Knight(Position(0, 2), 0),
+                                Rook(Position(0, 3), 0)]
+        self.blackPromotions = [Rook(Position(0, 7), 1), Knight(Position(0, 6), 1), Bishop(Position(0, 5), 1),
+                                Queen(Position(0, 4), 1)]
 
     def Forfeit(self):
         # resign
@@ -79,7 +82,7 @@ class Board:
         # switch between 0 and 1
         # (0 + 1) * -1 + 2 = 1
         # (1 + 1) * -1 + 2 = 0
-        self.player = (self.player + 1 ) * -1 + 2
+        self.player = (self.player + 1) * -1 + 2
         # CHECK IF THE PLAYER LOST OR NOT
         self.IsCheckmate()
 
@@ -125,6 +128,8 @@ class Board:
             else:
                 self.SwitchTurn()
             self.Check()
+            # print logs of moves and captures to the console, piece.code change name to king, queen, bishop, knight, rook, pawn
+            print(f"Move: {piece.code} {piece.position} -> {position}")
 
     def MovePiece(self, piece, position):
         position = position.GetCopy()
@@ -157,14 +162,15 @@ class Board:
         EnemyCaptures = self.GetEnemyCaptures(self.player)
         if self.isCastling(piece, oldPosition):
             if math.fabs(position.x - oldPosition.x) == 2 and not self.VerifyMove(piece, Position(5, position.y), isAI) \
-                or math.fabs(position.x - oldPosition.x) == 3 and not self.VerifyMove(piece, Position(3, position.y), isAI) \
-                or self.IsInCheck(piece):
+                    or math.fabs(position.x - oldPosition.x) == 3 and not self.VerifyMove(piece,
+                                                                                          Position(3, position.y), isAI) \
+                    or self.IsInCheck(piece):
                 self.UndoMove(piece, capturedPiece, oldPosition, position)
                 return False
 
         for pos in EnemyCaptures:
             if (self.WhiteKing.position == pos and piece.color == 0) \
-                or (self.BlackKing.position == pos and piece.color == 1):
+                    or (self.BlackKing.position == pos and piece.color == 1):
                 self.UndoMove(piece, capturedPiece, oldPosition, position)
                 if captureEnPassant != None:
                     self.grid[position.x][oldPosition.y] = captureEnPassant
@@ -188,7 +194,7 @@ class Board:
                     captures = captures + piececaptures
         return captures
 
-    def isCastling(self,king, position):
+    def isCastling(self, king, position):
         return type(king) == King and abs(king.position.x - position.x) > 1
 
     def isEnPassant(self, piece, newPos):
@@ -203,7 +209,7 @@ class Board:
 
     def IsInCheck(self, piece):
         return type(piece) == King and \
-                ((piece.color == 0 and self.checkWhiteKing) or (piece.color == 1 and self.checkBlackKing))
+            ((piece.color == 0 and self.checkWhiteKing) or (piece.color == 1 and self.checkBlackKing))
 
     def CastleKing(self, king, position):
         position = position.GetCopy()

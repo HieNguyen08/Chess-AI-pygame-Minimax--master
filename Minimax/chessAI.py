@@ -2,6 +2,7 @@ from Minimax.PointMap import map_points, PieceMap
 from pieces import Pawn
 import math
 
+
 class Minimax(object):
     def __init__(self, depth, board, AlphBetaPruning=True, UsePointMaps=True):
         self.depth = depth
@@ -56,7 +57,6 @@ class Minimax(object):
                             self.board.MoveSimulation(pion, position)
         return currentPiece, bestMove
 
-
     def minimax(self, depth, isMaximizer, alpha, beta):
         if self.depth == depth:
             return self.Evaluate() * (-1)
@@ -64,7 +64,7 @@ class Minimax(object):
         if isMaximizer:
             bestScore = -9999
             possibleMoves = self.LegalMoves(1, 7)
-            for _index in range(len(possibleMoves) -1, -1, -1):
+            for _index in range(len(possibleMoves) - 1, -1, -1):
                 piece = possibleMoves[_index][1]
                 i = possibleMoves[_index][2]
                 prev_pos = piece.position
@@ -81,7 +81,7 @@ class Minimax(object):
         else:
             bestScore = 9999
             possibleMoves = self.LegalMoves(0, 0)
-            for _index in range(len(possibleMoves) -1, -1, -1):
+            for _index in range(len(possibleMoves) - 1, -1, -1):
                 piece = possibleMoves[_index][1]
                 i = possibleMoves[_index][2]
                 prev_pos = piece.position
@@ -107,10 +107,11 @@ class Minimax(object):
                     totalScore += score
 
         return totalScore
+
     def UndoMove(self, currentPiece, piece, prev_pos, p):
-        if currentPiece == None:
+        if currentPiece is None:
             self.board.MoveSimulation(piece, prev_pos)
-        elif currentPiece != None:
+        elif currentPiece is not None:
             self.board.MoveSimulation(piece, prev_pos)
             self.board.MoveSimulation(currentPiece, p)
 
@@ -119,7 +120,7 @@ class Minimax(object):
         possibleMoves = []
         moves, captures = self.board.GetAllowedMoves(piece, True)
         for pos in captures:
-            if self.board.grid[pos.x][pos.y] != None:
+            if self.board.grid[pos.x][pos.y] is not None:
                 bestMoves.append([10 * self.board.grid[pos.x][pos.y].value - piece.value, piece, pos])
                 if type(piece) == Pawn and (pos.y == position):
                     bestMoves[-1][0] == bestMoves[-1][0] + 90

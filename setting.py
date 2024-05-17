@@ -3,12 +3,13 @@ import pygame
 pygame.init()
 pygame.font.init()
 
+
 class Setting:
     def __init__(self):
         self.boardSize = 8
         self.windowIconSize = 30
-        self.width = 1600
-        self.height = 900
+        self.width = 800
+        self.height = 600
         self.resolution = (self.width, self.height)
         self.top_offset = 20
         self.spotSize = (self.height - self.top_offset) // self.boardSize
@@ -38,6 +39,7 @@ class Setting:
             {"dark": (118, 148, 85), "light": (234, 238, 210), "outline": (0, 0, 0)},
         ]
 
+
 class Sound:
     def __init__(self):
         self.capture_sound = pygame.mixer.Sound("./assets/sounds/capture_sound.mp3")
@@ -49,6 +51,7 @@ class Sound:
         self.move_sound = pygame.mixer.Sound("./assets/sounds/move_sound.mp3")
         self.stalemate_sound = pygame.mixer.Sound("./assets/sounds/stalemate_sound.mp3")
         self.pop = pygame.mixer.Sound("./assets/sounds/pop.mp3")
+
 
 Config = Setting()
 sounds = Sound()

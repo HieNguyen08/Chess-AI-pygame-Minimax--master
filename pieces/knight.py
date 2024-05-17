@@ -3,6 +3,7 @@ from tools import OnBoard, Position
 from setting import Config
 from utils import GetSprite
 
+
 class Knight(Piece):
     def __init__(self, position, color):
         super().__init__(position, color)

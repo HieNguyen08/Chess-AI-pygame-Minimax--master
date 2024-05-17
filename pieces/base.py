@@ -2,6 +2,7 @@ from setting import Config
 from utils import *
 from tools import Position, OnBoard
 
+
 class Piece:
     def __init__(self, position, color):
         # 0 -> White, 1 -> Black
@@ -19,8 +20,8 @@ class Piece:
         captures = []
         for pattern in patterns:
             m, c = self.generator(board, pattern[0], pattern[1])
-            moves =  moves+ m
-            captures = captures+ c
+            moves = moves + m
+            captures = captures + c
         return moves, captures
 
     def generator(self, board, dx, dy):

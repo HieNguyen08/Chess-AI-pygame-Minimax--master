@@ -17,7 +17,6 @@ rh = pygame.transform.smoothscale(red_highlight, highlight_size)
 ch = pygame.transform.smoothscale(circle_highlight, highlight_size)
 oh = pygame.transform.smoothscale(outline_highlight, highlight_size)
 
-
 white_pawn = pygame.image.load("./assets/images/white_pawn.png")
 white_bishop = pygame.image.load("./assets/images/white_bishop.png")
 white_knight = pygame.image.load("./assets/images/white_knight.png")
@@ -32,8 +31,10 @@ black_rook = pygame.image.load("./assets/images/black_rook.png")
 black_queen = pygame.image.load("./assets/images/black_queen.png")
 black_king = pygame.image.load("./assets/images/black_king.png")
 
+
 def translate(value, min1, max1, min2, max2):
-    return min2 + (max2-min2) * ((value-min1)/(max1-min1))
+    return min2 + (max2 - min2) * ((value - min1) / (max1 - min1))
+
 
 def GetSprite(piece):
     sprite = None

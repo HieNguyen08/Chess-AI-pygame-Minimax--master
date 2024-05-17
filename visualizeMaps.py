@@ -7,11 +7,13 @@ from utils import translate
 
 pygame.init()
 pygame.font.init()
+# Not set to full screen mode
 screen = pygame.display.set_mode(Config.resolution)
 animateSpot = 0
 showValues = False
 
 myFont = pygame.font.SysFont("consolas", 20, bold=True)
+
 
 def DrawChessBoard(mapValues):
     global animateSpot
@@ -68,6 +70,7 @@ def DimColor(colour, dim, _min, _max):
 
     return (r, g, b)
 
+
 # states 0->pawn, 1->bishop, 2->knight, 3->rook, 4->queen, 5->king
 states = ["pawn", "bishop", "knight", "rook", "queen", "king"]
 mapState = 0
@@ -86,7 +89,7 @@ while run:
                 mapState = (mapState + 1) % 6
                 currentPiece.text = states[mapState]
             elif event.key == pygame.K_LEFT:
-                mapState = (mapState-1) if mapState != 0 else 5
+                mapState = (mapState - 1) if mapState != 0 else 5
                 currentPiece.text = states[mapState]
             elif event.key == pygame.K_ESCAPE:
                 run = False
@@ -94,7 +97,7 @@ while run:
                 Config.themeIndex = (Config.themeIndex + 1) % len(Config.themes)
                 print(Config.themeIndex)
             elif event.key == pygame.K_DOWN:
-                Config.themeIndex = (Config.themeIndex - 1) if Config.themeIndex > 0 else len(Config.themes)-1
+                Config.themeIndex = (Config.themeIndex - 1) if Config.themeIndex > 0 else len(Config.themes) - 1
             elif event.key == pygame.K_SPACE:
                 showValues = not showValues
 

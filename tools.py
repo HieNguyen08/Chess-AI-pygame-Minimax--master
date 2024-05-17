@@ -5,7 +5,7 @@ class Position:
         self.y = y
 
     def __eq__(self, other):
-        if other == None:
+        if other is None:
             return False
         elif self.x == other.x and self.y == other.y:
             return True
